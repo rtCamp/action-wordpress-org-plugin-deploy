@@ -98,13 +98,13 @@ svn add . --force > /dev/null
 # Also suppress stdout here
 svn status | grep '^\!' | sed 's/! *//' | xargs -I% svn rm % > /dev/null
 
+# Copy tag locally
+echo "➤ Copying tag..."
+svn cp "trunk" "tags/$VERSION"
+
 svn status
 
 echo "︎➤ Committing files..."
 svn commit -m "Update to version $VERSION from GitHub" --no-auth-cache --non-interactive  --username "$WORDPRESS_USERNAME" --password "$WORDPRESS_PASSWORD"
-
-# SVN tag to VERSION
-echo "➤ Tagging version..."
-svn cp "^/$SLUG/trunk" "^/$SLUG/tags/$VERSION" -m "Tag $VERSION" --no-auth-cache --non-interactive --username "$WORDPRESS_USERNAME" --password "$WORDPRESS_PASSWORD"
 
 echo "✓ Plugin deployed!"
