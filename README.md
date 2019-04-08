@@ -25,8 +25,8 @@ A [GitHub Action](https://github.com/features/actions) that publishes your plugi
 
 ```
 workflow "Deploy" {
+     on = "create"
      resolves = ["WordPress Plugin Deploy"]
-     on = "push"
    }
    
    # Filter for tag
