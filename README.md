@@ -21,6 +21,8 @@ A [GitHub Action](https://github.com/features/actions) that publishes your plugi
 | CUSTOM_PATH    | null                                   | Some plugins tend to have a different folder inside git repository where the source files are kept aside from development files. If provided files will be copied from `CUSTOM_PATH` to plugin `trunk`.                                                                                                                                                                                                                                                     |
 | EXCLUDE_LIST   | .git, .github, exclude.txt, ASSETS_DIR | Add file / folders that you wish to exclude from final list of files to be sent to plugin `trunk`. Eg development files.   Final value of this var is expected to be a string delimited with spaces. Eg: '.gitignore package.json README.md'   Please Note, excluded file/folder path, is considered from the root of repository unless `CUSTOM_PATH` is provided, in which case excluded file/folder path should be relative to the final source of files. |
 
+**⚠️ Note:** If you repository contains `composer.json` and `package.json`, Please add `vendor` and `node_modules` directories respectively, in `EXCLUDE_LIST`.
+
 ### Example Workflow File
 
 ```
