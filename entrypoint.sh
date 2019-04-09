@@ -32,18 +32,6 @@ echo "ℹ︎ VERSION is $VERSION"
 git archive --format=tar --prefix="archive-${VERSION}/" "${VERSION}" | (cd /tmp/ && tar xf -)
 cd "/tmp/archive-${VERSION}/"
 
-# Install composer dependencies
-# Run `composer install`  if composer.json is found.
-if [[ -f "composer.json" ]]; then
-  composer install --no-dev --optimize-autoloader
-fi
-
-# Install npm dependencies
-# Run `npm install` if package.json is found.
-if [[ -f "package.json" ]]; then
-  npm install
-fi
-
 # Install project dependencies
 # This is to allow the plugin author to run custom command for asset building process.
 if [[ ! -z "$CUSTOM_COMMAND" ]]; then
@@ -57,7 +45,7 @@ if [[ ! -z "$EXCLUDE_LIST" ]]; then
 fi
 
 # Create exclude file with default values anyway.
-echo ".git .github exclude.txt ${ASSETS_DIR}" | tr " " "\n" >> exclude.txt
+echo ".git .github exclude.txt ${ASSETS_DIR} node_modules" | tr " " "\n" >> exclude.txt
 
 SVN_URL="http://plugins.svn.wordpress.org/${SLUG}/"
 SVN_DIR="/github/svn-${SLUG}"
