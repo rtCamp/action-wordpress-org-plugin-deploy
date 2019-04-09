@@ -39,7 +39,7 @@ workflow "Deploy" {
    
    action "WordPress Plugin Deploy" {
      needs = ["tag"]
-     uses = "rtCamp/action-wp-org-plugin-deploy@master"
+     uses = "rtCamp/action-wordpress-org-plugin-deploy@master"
      secrets = ["WORDPRESS_USERNAME", "WORDPRESS_PASSWORD"]
      env = {
        SLUG = "plugin-slug"
