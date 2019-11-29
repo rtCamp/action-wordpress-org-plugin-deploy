@@ -33,17 +33,16 @@ Here is an example setup of this action:
 - Add the following code to `create.yml` file.
 
 ```
-on: create
 name: Deploy
+on:
+  create:
+    tags:
+      - "*"
 jobs:
   tag:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: tag
-      uses: actions/bin/filter@master
-      with:
-        args: tag
     - name: WordPress Plugin Deploy
       uses: rtCamp/action-wordpress-org-plugin-deploy@master
       env:
