@@ -1,5 +1,3 @@
-> **⚠️ Note:** To use this GitHub Action, you must have access to GitHub Actions. GitHub Actions are currently only available in public beta (you must apply for access).
-
 This action is a part of [GitHub Actions Library](https://github.com/rtCamp/github-actions-library/) created by [rtCamp](https://github.com/rtCamp/).
 
 # WordPress.org Plugin Deployment - GitHub Action
@@ -26,31 +24,33 @@ A [GitHub Action](https://github.com/features/actions) that publishes your plugi
 - Don't forget to add build directories in `EXCLUDE_LIST`, Eg. `vendor` for `composer install`.
   - `node_modules` is excluded by default.
 
-### Example Workflow File
+### Usage
+Here is an example setup of this action:
+
+- Create a `push.yml` file inside `.github/workflows` directory of your GitHub repo.
+- Add the following code to `create.yml` file.
 
 ```
-workflow "Deploy" {
-     on = "create"
-     resolves = ["WordPress Plugin Deploy"]
-   }
-   
-   # Filter for tag
-   action "tag" {
-       uses = "actions/bin/filter@master"
-       args = "tag"
-   }
-   
-   action "WordPress Plugin Deploy" {
-     needs = ["tag"]
-     uses = "rtCamp/action-wordpress-org-plugin-deploy@master"
-     secrets = ["WORDPRESS_USERNAME", "WORDPRESS_PASSWORD"]
-     env = {
-       SLUG = "plugin-slug"
-       CUSTOM_COMMAND = "composer install --no-dev --optimize-autoloader && npm install && gulp build"
-       CUSTOM_PATH = "post-contributor"
-       EXCLUDE_LIST = "asset_sources/"
-     }
-   }
+name: Deploy
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: WordPress Plugin Deploy
+      uses: rtCamp/action-wordpress-org-plugin-deploy@master
+      env:
+        CUSTOM_COMMAND: composer install --no-dev --optimize-autoloader && npm install
+          && gulp build
+        CUSTOM_PATH: post-contributor
+        EXCLUDE_LIST: asset_sources/
+        SLUG: plugin-slug
+        WORDPRESS_PASSWORD: ${{ secrets.WORDPRESS_PASSWORD }}
+        WORDPRESS_USERNAME: ${{ secrets.WORDPRESS_USERNAME }}
 ```
 
 ## Credits
