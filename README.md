@@ -27,7 +27,7 @@ A [GitHub Action](https://github.com/features/actions) that publishes your plugi
 ### Usage
 Here is an example setup of this action:
 
-- Create a `push.yml` file inside `.github/workflows` directory of your GitHub repo.
+- Create a `create.yml` file inside `.github/workflows` directory of your GitHub repo.
 - Add the following code to `create.yml` file.
 
 ```yml
