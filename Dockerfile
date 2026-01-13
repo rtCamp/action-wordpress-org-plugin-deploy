@@ -1,6 +1,6 @@
 # rtcamp/wp-plugin-base:latest at 2019-03-18T15:20:50IST
 # https://github.com/rtCamp/dockerfiles/tree/master/wp-plugin-base
-FROM rtcamp/wp-plugin-base@sha256:4a9c373e6a03d756390693a4a32c6976aff54d65b8b1c65d14e7a4eca9227c60 
+FROM rtcamp/wp-plugin-base@sha256:bec78ecb11bf918d970c7323b2a30ed6a7d55640307ccc7b49041169637a1df0 
 LABEL "com.github.actions.name"="WordPress Plugin Deploy"
 LABEL "com.github.actions.description"="Deploy to the WordPress Plugin Repository"
 LABEL "com.github.actions.icon"="upload-cloud"
